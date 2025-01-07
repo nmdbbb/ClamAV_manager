@@ -1,0 +1,5 @@
+clamav/chart/ChartGenerator.class
+clamav/export/FileExporter.class
+clamav/processor/ScanResultProcessor.class
+clamav/MainGUI.class
+clamav/scanner/ClamAVScanner.class
