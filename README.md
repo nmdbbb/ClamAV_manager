@@ -1,26 +1,46 @@
-ClamAV Scanner
-Mô tả
-ClamAV Scanner là một ứng dụng Java được phát triển để chạy trên hệ điều hành Linux. Ứng dụng tích hợp với ClamAV, một công cụ mã nguồn mở, để quét các tệp và thư mục nhằm phát hiện các tệp bị nhiễm virus. Kết quả quét được hiển thị thông qua giao diện đồ họa người dùng (GUI).
+# ClamAV Scanner Project
 
-Ứng dụng hỗ trợ:
+## Mô tả
+Dự án **ClamAV Scanner** được xây dựng để tích hợp và quản lý công cụ quét virus **ClamAV** trên hệ điều hành Linux. Giao diện đồ họa (GUI) được phát triển bằng Java Swing giúp người dùng dễ dàng sử dụng và quản lý các hoạt động quét file hoặc thư mục.
 
-Quét virus từ các tệp và thư mục cụ thể.
-Hiển thị kết quả quét trong bảng và biểu đồ.
-Xuất kết quả quét ra tệp Excel để lưu trữ.
-Chức năng chính
-Quét Virus: Tích hợp với ClamAV để quét và phân loại tệp.
-Hiển thị Kết Quả: Hiển thị danh sách tệp bị nhiễm và tệp sạch trong bảng.
-Biểu đồ: Hiển thị số lượng tệp sạch và tệp bị nhiễm dưới dạng biểu đồ thanh.
-Xuất Kết Quả: Xuất dữ liệu kết quả ra tệp Excel.
-Yêu cầu hệ thống
-Hệ điều hành: Linux (Ubuntu, Debian, CentOS,...).
-Java: JRE hoặc JDK phiên bản 8 trở lên.
-ClamAV: Đã cài đặt và cấu hình trên hệ thống.
-Maven: Được sử dụng để xây dựng dự án.
-Hướng dẫn sử dụng
-1. Chạy ứng dụng
-Đảm bảo đã cài đặt Java và ClamAV trên hệ thống.
-Biên dịch và đóng gói dự án:
+---
+
+## Chức năng chính
+1. **Quét Virus**:
+   - Chọn file hoặc thư mục để quét virus.
+   - Hiển thị danh sách các file bị nhiễm và loại virus.
+
+2. **Biểu đồ**:
+   - Hiển thị biểu đồ kết quả quét với số lượng file sạch và bị nhiễm.
+
+3. **Xuất Dữ Liệu**:
+   - Xuất kết quả quét ra file Excel.
+   - Xuất biểu đồ kết quả quét ra file hình ảnh.
+
+4. **Theo dõi tiến trình**:
+   - Hiển thị tiến trình quét và thông tin file đang được quét.
+
+---
+
+## Yêu cầu hệ thống
+- **Hệ điều hành**: Linux (Hỗ trợ sử dụng ClamAV)
+- **Java JDK**: Phiên bản 8 trở lên
+- **ClamAV**: Đã được cài đặt trên hệ thống
+- **Thư viện bổ sung**:
+  - JFreeChart (dùng để vẽ biểu đồ)
+  - Apache POI (dùng để xuất file Excel)
+
+---
+
+## Hướng dẫn sử dụng
+1. **Cài đặt ClamAV trên Linux**:
+   ```bash
+   sudo apt update
+   sudo apt install clamav
+   sudo freshclam
+Build và chạy ứng dụng:
+
+Biên dịch và đóng gói ứng dụng:
 bash
 Copy code
 mvn clean package
@@ -28,39 +48,35 @@ Chạy ứng dụng:
 bash
 Copy code
 java -jar target/clamav-project-1.0-SNAPSHOT.jar
-2. Sử dụng giao diện
-Nhấn nút Choose File/Directory để chọn tệp hoặc thư mục cần quét.
-Nhấn nút Scan để bắt đầu quét.
-Quan sát kết quả quét trong bảng và biểu đồ.
-Nhấn Export to Excel để xuất kết quả ra tệp Excel trong thư mục result/.
-3. Cấu hình ClamAV
-Đảm bảo ClamAV đã được cài đặt trên hệ thống:
-bash
-Copy code
-sudo apt update
-sudo apt install clamav clamav-daemon
-Cập nhật cơ sở dữ liệu ClamAV:
-bash
-Copy code
-sudo freshclam
+Chọn file hoặc thư mục:
+
+Nhấn nút Choose File/Directory để chọn file hoặc thư mục cần quét.
+Quét virus:
+
+Nhấn nút Scan để bắt đầu quét. Tiến trình quét sẽ được hiển thị trong thanh tiến trình.
+Xuất kết quả:
+
+Nhấn nút Export to Excel để xuất kết quả quét ra file Excel tại thư mục result.
+Xem biểu đồ:
+
+Biểu đồ kết quả sẽ hiển thị bên phải giao diện. File hình ảnh biểu đồ sẽ được lưu tại thư mục result.
 Cấu trúc dự án
-plaintext
+bash
 Copy code
 clamav-project/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   ├── clamav/
-│   │   │   │   ├── chart/
-│   │   │   │   │   └── ChartGenerator.java
-│   │   │   │   ├── export/
-│   │   │   │   │   └── FileExporter.java
-│   │   │   │   ├── processor/
-│   │   │   │   │   └── ScanResultProcessor.java
-│   │   │   │   ├── scanner/
-│   │   │   │   │   └── ClamAVScanner.java
-│   │   │   │   └── MainGUI.java
-├── result/
-│   └── (Thư mục chứa tệp Excel và ảnh kết quả)
-├── pom.xml
-└── README.md
+├── src/main/java/clamav/
+│   ├── chart/               # Lớp vẽ biểu đồ
+│   │   └── ChartGenerator.java
+│   ├── export/              # Lớp xuất dữ liệu
+│   │   └── FileExporter.java
+│   ├── processor/           # Xử lý kết quả quét
+│   │   └── ScanResultProcessor.java
+│   ├── scanner/             # Tích hợp ClamAV
+│   │   ├── ClamAVScanner.java
+│   │   └── FileUtils.java
+│   └── MainGUI.java         # Giao diện chính
+├── result/                  # Lưu kết quả (Excel, biểu đồ)
+├── pom.xml                  # Cấu hình Maven
+Ghi chú
+Ứng dụng chỉ chạy trên hệ điều hành Linux do phụ thuộc vào ClamAV.
+Nếu gặp lỗi khi quét, vui lòng kiểm tra cài đặt ClamAV hoặc cấp quyền cho file.
