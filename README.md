@@ -38,8 +38,8 @@ Dự án **ClamAV Scanner** được xây dựng để tích hợp và quản l�
    sudo apt update
    sudo apt install clamav
    sudo freshclam
-Build và chạy ứng dụng:
 
+2. Build và chạy ứng dụng:
 Biên dịch và đóng gói ứng dụng:
 bash
 Copy code
@@ -48,20 +48,22 @@ Chạy ứng dụng:
 bash
 Copy code
 java -jar target/clamav-project-1.0-SNAPSHOT.jar
-Chọn file hoặc thư mục:
-
-Nhấn nút Choose File/Directory để chọn file hoặc thư mục cần quét.
+3. Thao tác trong giao diện:
 Quét virus:
-
-Nhấn nút Scan để bắt đầu quét. Tiến trình quét sẽ được hiển thị trong thanh tiến trình.
-Xuất kết quả:
-
-Nhấn nút Export to Excel để xuất kết quả quét ra file Excel tại thư mục result.
+Nhấn nút Choose File/Directory để chọn thư mục hoặc file cần quét.
+Nhấn nút Scan để bắt đầu quét.
+Trong khi quét, thanh tiến trình sẽ hiển thị trạng thái và file hiện tại đang được quét.
+Sau khi quét xong:
+Hiển thị danh sách các file bị nhiễm virus kèm loại virus.
+Hiển thị tổng số file sạch và file bị nhiễm trên biểu đồ.
+Xuất dữ liệu:
+Nhấn nút Export to Excel để xuất kết quả quét ra file Excel.
+File kết quả sẽ được lưu tại thư mục result với tên scan_results.xlsx.
 Xem biểu đồ:
-
-Biểu đồ kết quả sẽ hiển thị bên phải giao diện. File hình ảnh biểu đồ sẽ được lưu tại thư mục result.
+Biểu đồ kết quả (hiển thị số file sạch và số file bị nhiễm) sẽ hiển thị bên phải giao diện.
+File ảnh biểu đồ sẽ được tự động lưu tại thư mục result với tên scan_chart.png.
 Cấu trúc dự án
-bash
+plaintext
 Copy code
 clamav-project/
 ├── src/main/java/clamav/
@@ -76,7 +78,7 @@ clamav-project/
 │   │   └── FileUtils.java
 │   └── MainGUI.java         # Giao diện chính
 ├── result/                  # Lưu kết quả (Excel, biểu đồ)
+│   ├── scan_results.xlsx    # File Excel kết quả quét
+│   └── scan_chart.png       # File ảnh biểu đồ
 ├── pom.xml                  # Cấu hình Maven
-Ghi chú
-Ứng dụng chỉ chạy trên hệ điều hành Linux do phụ thuộc vào ClamAV.
-Nếu gặp lỗi khi quét, vui lòng kiểm tra cài đặt ClamAV hoặc cấp quyền cho file.
+├── target/                  # File biên dịch (JAR)
